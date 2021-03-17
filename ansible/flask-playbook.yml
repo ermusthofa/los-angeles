@@ -1,0 +1,8 @@
+---
+- name: Configure Flask Apps
+  hosts: flask
+
+  tasks:
+  - name: display variables from dynamic inventory
+    ansible.builtin.debug:
+      var: ansible_facts
