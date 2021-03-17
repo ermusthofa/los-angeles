@@ -42,6 +42,7 @@
     owner: root
     group: root
     mode: "0755"
+  register: flask_runit_template
   loop:
   - { src: "run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask" }
   - { src: "log_run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask/log" }

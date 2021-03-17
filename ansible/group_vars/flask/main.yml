@@ -1,0 +1,10 @@
+nginx_server_tokens: "off"
+nginx_remove_default_vhost: true
+
+nginx_vhosts:
+- listen: "80"
+  server_name: flask
+  access_log: "/var/log/nginx/flask.log"
+  error_log: "/var/log/nginx/flask-error.log"
+  extra_parameters: ""
+  template: "files/ansible-role-nginx/flask_vhost.j2"

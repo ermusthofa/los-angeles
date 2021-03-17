@@ -7,3 +7,4 @@
 
   roles:
   - devops-la-challenges
+  - ansible-role-nginx

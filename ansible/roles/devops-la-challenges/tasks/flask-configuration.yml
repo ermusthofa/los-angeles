@@ -15,17 +15,22 @@
     line: Werkzeug==0.16.0
   become: yes
   become_user: "{{ devops_la_challenges_flask_user }}"
-  notify: ansible install specified python requirements
+  register: flask_requirements
+  notify: ansible restart runit
 
-- name: ansible flush handlers
-  meta: flush_handlers
+- name: ansible install specified python requirements
+  ansible.builtin.pip:
+    requirements: "{{ devops_la_challenges_flask_dir }}/requirements.txt"
+  when: flask_requirements.changed
 
 - name: ansible create flask symlink
   ansible.builtin.file:
     src: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask"
     path: "/etc/service/flask"
     state: link
+  register: flask_symlink
 
+# Set logrotate
 - name: ansible crete logrotate
   ansible.builtin.blockinfile:
     path: "/etc/logrotate.d/{{ item.path }}"
