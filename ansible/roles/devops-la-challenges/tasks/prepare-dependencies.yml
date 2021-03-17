@@ -4,3 +4,7 @@
     update_cache: yes
     name: "{{ devops_la_challenges_flask_dependencies }}"
     state: present
+
+- name: ansible install gunicorn
+  ansible.builtin.pip:
+    name: gunicorn==19.10.0

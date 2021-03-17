@@ -1,0 +1,3 @@
+#!/bin/sh -e
+exec 2>&1
+exec chpst -u {{ devops_la_challenges_flask_user }} gunicorn --workers={{ ansible_processor_vcpus*2 + 1}} --bind 0.0.0.0:8000 --chdir {{ devops_la_challenges_flask_dir }} app:app

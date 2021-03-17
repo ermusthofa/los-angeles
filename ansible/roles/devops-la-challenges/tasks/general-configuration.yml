@@ -8,12 +8,40 @@
     name: "{{ devops_la_challenges_flask_user }}"
     comment: unprivileged user to run flask apps
 
-- name: ansible create webapps directory
+- name: ansible create dependency directories
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ item.path }}"
     state: directory
-    owner: "{{ devops_la_challenges_flask_user }}"
-    group: "{{ devops_la_challenges_flask_user }}"
-    mode: "0744"
-  with_items:
-  - "{{ devops_la_challenges_flask_dir }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop:
+  - {
+      path: "{{ devops_la_challenges_flask_dir }}",
+      owner: "{{ devops_la_challenges_flask_user }}",
+      group: "{{ devops_la_challenges_flask_user }}",
+      mode: "0755"
+    }
+  - {
+      path: "{{ devops_la_challenges_flask_log_dir }}",
+      owner: "{{ devops_la_challenges_flask_user }}",
+      group: "{{ devops_la_challenges_flask_user }}",
+      mode: "0755"
+    }
+  - {
+      path: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask/log",
+      owner: "root",
+      group: "root",
+      mode: "0755"
+    }
+
+- name: ansible render runit template
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}/run"
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+  - { src: "run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask" }
+  - { src: "log_run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask/log" }

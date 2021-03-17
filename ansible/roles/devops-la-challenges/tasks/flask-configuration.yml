@@ -1,0 +1,34 @@
+---
+- name: ansible clone flask apps repository
+  ansible.builtin.git:
+    repo: "{{ devops_la_challenges_flask_repository }}"
+    dest: "{{ devops_la_challenges_flask_dir }}"
+    force: yes
+    clone: yes
+  become: yes
+  become_user: "{{ devops_la_challenges_flask_user }}"
+
+- name: ansible set requirements.txt with version constraints
+  ansible.builtin.lineinfile:
+    path: "{{ devops_la_challenges_flask_dir }}/requirements.txt"
+    regexp: '^Werkzeug'
+    line: Werkzeug==0.16.0
+  become: yes
+  become_user: "{{ devops_la_challenges_flask_user }}"
+  notify: ansible install specified python requirements
+
+- name: ansible flush handlers
+  meta: flush_handlers
+
+- name: ansible create flask symlink
+  ansible.builtin.file:
+    src: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask"
+    path: "/etc/service/flask"
+    state: link
+
+- name: ansible crete logrotate
+  ansible.builtin.blockinfile:
+    path: "/etc/logrotate.d/{{ item.path }}"
+    block: "{{ item.conf }}"
+    create: true
+  loop: "{{ devops_la_challenges_flask_logrotate }}"

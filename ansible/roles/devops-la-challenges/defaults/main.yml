@@ -1,5 +1,18 @@
-devops_la_challenges_flask_dependencies: ["git", "python-pip"]
+devops_la_challenges_flask_dependencies: ["git", "python-pip", "runit"]
 devops_la_challenges_flask_dir: "/webapps/devops"
 devops_la_challenges_flask_listen_address: "127.0.0.1"
+devops_la_challenges_flask_log_dir: "/var/log/flask"
 devops_la_challenges_flask_repository: "https://github.com/lumbans/devops-la-challenges.git"
+devops_la_challenges_flask_runit_stage_dir: "/etc/runit"
 devops_la_challenges_flask_user: "devops"
+
+devops_la_challenges_flask_logrotate:
+- path: flask
+  conf: |
+    {{ devops_la_challenges_flask_log_dir }}/current {
+            weekly
+            rotate 3
+            size 10M
+            compress
+            delaycompress
+    }
