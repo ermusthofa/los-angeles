@@ -1,2 +1,5 @@
 # Ignore Vagrant generated files
 .vagrant/
+
+# Ignore required roles
+ansible/roles/ansible-role-nginx

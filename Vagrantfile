@@ -1,13 +1,19 @@
 # ~*~ mode: ruby ~*~
 # vi: set ft=ruby :
 
+require_relative "requirements.rb"
+
+# Set number of nodes
 N = 1
 
+# Set ansible inventory
 ansible_groups = {
   "flask" => [
     "flask-[0:#{N-1}]"
   ]
 }
+
+# Set ip subnet
 subnet = "10.10.10."
 subnet_ip_start = 20
 
@@ -36,4 +42,3 @@ Vagrant.configure("2") do |config|
 
   end
 end
-  
