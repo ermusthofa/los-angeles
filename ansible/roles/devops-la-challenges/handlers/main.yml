@@ -1,0 +1,4 @@
+---
+- name: ansible install specified python requirements
+  ansible.builtin.pip:
+    requirements: "{{ devops_la_challenges_flask_dir }}/requirements.txt"

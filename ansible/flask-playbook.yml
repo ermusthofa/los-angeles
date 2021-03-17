@@ -1,8 +1,9 @@
 ---
 - name: Configure Flask Apps
   hosts: flask
+  become: yes
+  become_method: sudo
+  become_user: root
 
-  tasks:
-  - name: display variables from dynamic inventory
-    ansible.builtin.debug:
-      var: ansible_facts
+  roles:
+  - devops-la-challenges

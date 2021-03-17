@@ -1,0 +1,6 @@
+---
+- name: ansible install dependency packages
+  ansible.builtin.apt:
+    update_cache: yes
+    name: "{{ devops_la_challenges_flask_dependencies }}"
+    state: present

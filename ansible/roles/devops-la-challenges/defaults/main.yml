@@ -1,1 +1,5 @@
+devops_la_challenges_flask_dependencies: ["git", "python-pip"]
+devops_la_challenges_flask_dir: "/webapps/devops"
 devops_la_challenges_flask_listen_address: "127.0.0.1"
+devops_la_challenges_flask_repository: "https://github.com/lumbans/devops-la-challenges.git"
+devops_la_challenges_flask_user: "devops"

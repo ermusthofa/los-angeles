@@ -1,0 +1,19 @@
+---
+- name: ansible set timezone to UTC
+  community.general.timezone:
+    hwclock: UTC
+
+- name: ansible create devops user
+  ansible.builtin.user:
+    name: "{{ devops_la_challenges_flask_user }}"
+    comment: unprivileged user to run flask apps
+
+- name: ansible create webapps directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ devops_la_challenges_flask_user }}"
+    group: "{{ devops_la_challenges_flask_user }}"
+    mode: "0744"
+  with_items:
+  - "{{ devops_la_challenges_flask_dir }}"
