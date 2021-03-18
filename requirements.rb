@@ -1,4 +1,5 @@
 require 'open3'
+require 'fileutils'
 
 # Define requirements
 required_packages = [
@@ -35,4 +36,9 @@ required_roles.each do |role|
       exit
     end
   end
+end
+
+if !directory_exists?('.vagrant/provisioners/ansible/inventory')
+  FileUtils.mkdir_p '.vagrant/provisioners/ansible/inventory'
+  FileUtils.ln 'ansible/group_vars', '.vagrant/provisioners/ansible/inventory/group_vars'
 end
