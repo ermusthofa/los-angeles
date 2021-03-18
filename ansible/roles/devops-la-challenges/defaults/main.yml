@@ -16,3 +16,17 @@ devops_la_challenges_flask_logrotate:
             compress
             delaycompress
     }
+
+devops_la_challenges_flask_ufw_rules:
+- {
+    rule: "limit",
+    port: "ssh",
+    proto: "tcp",
+    src: ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  }
+- {
+    rule: "allow",
+    port: "http",
+    proto: "tcp",
+    src: ["0.0.0.0/0"]
+  }

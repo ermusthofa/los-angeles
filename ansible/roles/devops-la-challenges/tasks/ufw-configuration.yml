@@ -1,0 +1,9 @@
+---
+- name: ansible configure ufw
+  community.general.ufw:
+    state: enabled
+    rule: "{{ ufw_rules.rule }}"
+    port: "{{ ufw_rules.port }}"
+    proto: "{{ ufw_rules.proto }}"
+    src: "{{ item }}"
+  loop: "{{ ufw_rules.src }}"
