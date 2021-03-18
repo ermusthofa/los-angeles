@@ -7,4 +7,4 @@
 
 - name: ansible install gunicorn
   ansible.builtin.pip:
-    name: gunicorn==19.10.0
+    name: "gunicorn=={{ devops_la_challenges_flask_gunicorn_version|default('19.10.0', true) }}"

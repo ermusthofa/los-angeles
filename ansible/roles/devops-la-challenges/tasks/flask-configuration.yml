@@ -6,15 +6,15 @@
     force: yes
     clone: yes
   become: yes
-  become_user: "{{ devops_la_challenges_flask_user }}"
+  become_user: "{{ devops_la_challenges_flask_user|default('devops', true) }}"
 
 - name: ansible set requirements.txt with version constraints
   ansible.builtin.lineinfile:
     path: "{{ devops_la_challenges_flask_dir }}/requirements.txt"
     regexp: '^Werkzeug'
-    line: Werkzeug==0.16.0
+    line: "Werkzeug=={{ devops_la_challenges_flask_werkzeug_version|default('0.16.0', true) }}"
   become: yes
-  become_user: "{{ devops_la_challenges_flask_user }}"
+  become_user: "{{ devops_la_challenges_flask_user|default('devops', true) }}"
   register: flask_requirements
   notify: ansible restart runit
 

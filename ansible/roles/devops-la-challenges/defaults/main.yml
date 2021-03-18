@@ -1,10 +1,19 @@
 devops_la_challenges_flask_dependencies: ["git", "python-pip", "runit"]
 devops_la_challenges_flask_dir: "/webapps/devops"
+
+# set gunicorn version. default '19.10.0'
+devops_la_challenges_flask_gunicorn_version: ""
+
 devops_la_challenges_flask_listen_address: "127.0.0.1"
 devops_la_challenges_flask_log_dir: "/var/log/flask"
 devops_la_challenges_flask_repository: "https://github.com/lumbans/devops-la-challenges.git"
 devops_la_challenges_flask_runit_stage_dir: "/etc/runit"
-devops_la_challenges_flask_user: "devops"
+
+# set unprivileged user . default 'devops'
+devops_la_challenges_flask_user: ""
+
+# set werkzeug version. default '0.16.0'
+devops_la_challenges_flask_werkzeug_version: ""
 
 devops_la_challenges_flask_logrotate:
 - path: flask

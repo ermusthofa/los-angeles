@@ -3,3 +3,6 @@
 
 # Ignore required roles
 ansible/roles/ansible-role-nginx
+
+# Ignore locust
+locust/

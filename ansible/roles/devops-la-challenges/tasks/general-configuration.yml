@@ -5,7 +5,7 @@
 
 - name: ansible create devops user
   ansible.builtin.user:
-    name: "{{ devops_la_challenges_flask_user }}"
+    name: "{{ devops_la_challenges_flask_user|default('devops', true) }}"
     comment: unprivileged user to run flask apps
 
 - name: ansible create dependency directories
@@ -18,14 +18,14 @@
   loop:
   - {
       path: "{{ devops_la_challenges_flask_dir }}",
-      owner: "{{ devops_la_challenges_flask_user }}",
-      group: "{{ devops_la_challenges_flask_user }}",
+      owner: "{{ devops_la_challenges_flask_user|default('devops', true) }}",
+      group: "{{ devops_la_challenges_flask_user|default('devops', true) }}",
       mode: "0755"
     }
   - {
       path: "{{ devops_la_challenges_flask_log_dir }}",
-      owner: "{{ devops_la_challenges_flask_user }}",
-      group: "{{ devops_la_challenges_flask_user }}",
+      owner: "{{ devops_la_challenges_flask_user|default('devops', true) }}",
+      group: "{{ devops_la_challenges_flask_user|default('devops', true) }}",
       mode: "0755"
     }
   - {
