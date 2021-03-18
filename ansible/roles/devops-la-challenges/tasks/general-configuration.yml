@@ -47,6 +47,13 @@
   - { src: "run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask" }
   - { src: "log_run.j2", dest: "{{ devops_la_challenges_flask_runit_stage_dir }}/flask/log" }
 
+- name: ansible disable root login
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: "PermitRootLogin no"
+  notify: ansible restart ssh
+
 - name: ansible set ufw
   ansible.builtin.include: ufw-configuration.yml
   loop: "{{ devops_la_challenges_flask_ufw_rules }}"

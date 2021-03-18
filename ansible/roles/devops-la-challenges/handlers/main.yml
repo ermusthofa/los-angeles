@@ -5,3 +5,8 @@
     state: restarted
     service_dir: /etc/service
   when: not flask_symlink.failed or flask_runit_template.changed
+
+- name: ansible restart ssh
+  ansible.builtin.service:
+    name: ssh
+    state: restarted
